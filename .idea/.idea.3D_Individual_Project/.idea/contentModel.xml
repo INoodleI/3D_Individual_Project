@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Ryan\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Ryan\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_3D_Individual_Project.-1973676269.00" t="ExcludeRecursive" />
+    <e p="D:\Unity\3D_Individual_Project" t="IncludeRecursive">
+      <e p="3D_Individual_Project.sln" t="IncludeFlat" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Assets" t="Include">
+          <e p="Meadow" t="Include">
+            <e p="Lowpoly Medieval Demos" t="Include">
+              <e p="Environment_Free" t="Include">
+                <e p="MouseLook.cs" t="Include" />
+                <e p="PlayerMovement.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Lowpoly Medieval Environments" t="Include">
+              <e p="Sources" t="Include">
+                <e p="Shaders" t="Include">
+                  <e p="PT_Rock_Shader.shader" t="Include" />
+                  <e p="PT_Rock_Shader_VS.shader" t="Include" />
+                  <e p="PT_Vegetation_Flowers_Shader.shader" t="Include" />
+                  <e p="PT_Vegetation_Flowers_Shader_VS.shader" t="Include" />
+                  <e p="PT_Vegetation_Foliage_Shader.shader" t="Include" />
+                  <e p="PT_Vegetation_Foliage_Shader_VS.shader" t="Include" />
+                  <e p="PT_Vegetation_Opaque_Shader.shader" t="Include" />
+                  <e p="PT_Vegetation_Opaque_Shader_VS.shader" t="Include" />
+                  <e p="PT_Vegetation_Plants_Shader.shader" t="Include" />
+                  <e p="PT_Vegetation_Plants_Shader_VS.shader" t="Include" />
+                  <e p="PT_Water_Shader.shader" t="Include" />
+                  <e p="VS_indirect.cginc" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="BugAI" t="Include">
+            <e p="ChaseBehavior.cs" t="Include" />
+            <e p="RhinoBugBehavior.cs" t="Include" />
+            <e p="RhinoBugBrain.cs" t="Include" />
+            <e p="TestScript.cs" t="Include" />
+            <e p="WanderBehavior.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="PlayerController.cs" t="Include" />
+          </e>
+          <e p="Tilt.cs" t="Include" />
+        </e>
+        <e p="Ultimate 10 Plus Shaders" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="U10PS_DissolveOverTime.cs" t="Include" />
+            <e p="U10PS_ExampleReview.cs" t="Include" />
+            <e p="U10PS_MouseRotation.cs" t="Include" />
+            <e p="U10PS_SnowOverTime.cs" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="Blur.shader" t="Include" />
+            <e p="Depth Mask Edge Detection.shader" t="Include" />
+            <e p="Dissolve.shader" t="Include" />
+            <e p="Edge Detection.shader" t="Include" />
+            <e p="Force Field.shader" t="Include" />
+            <e p="Grass Sway.shader" t="Include" />
+            <e p="Lava3D.shader" t="Include" />
+            <e p="Ocean.shader" t="Include" />
+            <e p="Outline.shader" t="Include" />
+            <e p="Plasma.shader" t="Include" />
+            <e p="Plexus" t="Include">
+              <e p="Plexus Line.shader" t="Include" />
+              <e p="Plexus.compute" t="Include" />
+              <e p="Plexus.cs" t="Include" />
+            </e>
+            <e p="Simple Sine Wave.shader" t="Include" />
+            <e p="Snow.shader" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\Bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
