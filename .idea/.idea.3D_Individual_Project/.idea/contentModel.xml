@@ -40,6 +40,7 @@
             <e p="ChaseBehavior.cs" t="Include" />
             <e p="RhinoBugBehavior.cs" t="Include" />
             <e p="RhinoBugBrain.cs" t="Include" />
+            <e p="RidingBehavior.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
             <e p="WanderBehavior.cs" t="Include" />
           </e>

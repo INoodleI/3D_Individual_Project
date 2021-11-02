@@ -38,10 +38,10 @@ public class RhinoBugBrain : MonoBehaviour
         behaviors = new Dictionary<Type, RhinoBugBehavior>
         {
             {typeof(WanderBehavior), new WanderBehavior(this)},
-            {typeof(ChaseBehavior), new ChaseBehavior(this)}
+            {typeof(ChaseBehavior), new ChaseBehavior(this)},
+            {typeof(RidingBehavior), new RidingBehavior(this, Camera.main.transform)}
         };
-        currentState = behaviors.Values.First();
-        currentState.OnTrigger();
+        SwitchState(typeof(WanderBehavior));
     }
 
     // Update is called once per frame

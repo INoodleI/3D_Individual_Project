@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RidingBehavior : MonoBehaviour
+public class RidingBehavior : RhinoBugBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform cam;
+    public override Type Update()
     {
-        
+        brain.agent.SetDestination(transform.position + cam.forward*2f);
+        return GetType();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnTrigger()
     {
-        
+        base.OnTrigger();
+    }
+
+    public RidingBehavior(RhinoBugBrain b, Transform camera) : base(b)
+    {
+        cam = camera;
     }
 }

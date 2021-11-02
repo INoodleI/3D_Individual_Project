@@ -10,6 +10,7 @@ public class WanderBehavior : RhinoBugBehavior
     private Vector3 target;
     private bool waiting;
     private float waitingTime;
+
     public WanderBehavior(RhinoBugBrain b) : base(b)
     {
     }
