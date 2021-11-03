@@ -63,7 +63,7 @@ public class RhinoBugBrain : MonoBehaviour
         }
     }
 
-    private void SwitchState(Type nextState)
+    public void SwitchState(Type nextState)
     {
         currentState = behaviors[nextState];
         currentState.OnTrigger();

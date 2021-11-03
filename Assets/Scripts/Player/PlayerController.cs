@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,7 +16,19 @@ public class PlayerController : MonoBehaviour
     private float animSpeed;
     private float animVel;
 
-    private float groundedTimer;
+
+    [SerializeField] private GameObject animatedModel;
+    [SerializeField] private GameObject ragdoll;
+    [SerializeField] private Rigidbody hips;
+    
+    private enum PlayerState
+    {
+        Walking,
+        Ragdoll,
+        Riding
+    }
+
+    private PlayerState state = PlayerState.Walking;
     
     private Vector3 fallingVel;
     private float turnSmoothVelocity;
@@ -29,6 +42,39 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
+    {
+        switch (state)
+        {
+            case PlayerState.Walking:
+                Movement();
+                Gravity();
+                Jump();
+                CheckForRagdoll();
+                break;
+            case PlayerState.Ragdoll:
+                break;
+            case PlayerState.Riding:
+                break;
+            default:
+                Debug.LogError("WAAAAAAAHHHHHHHHHHHHH - Player Controller State");
+                break;
+        }
+    }
+
+    private void CheckForRagdoll()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+            Ragdoll();
+    }
+
+    public void Ragdoll()
+    {
+        state = PlayerState.Ragdoll;
+        animatedModel.SetActive(false);
+        ragdoll.SetActive(true);
+    }
+
+    private void Movement()
     {
         float horiz = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
@@ -58,22 +104,23 @@ public class PlayerController : MonoBehaviour
         {
             BlendAnimSpeed(0);
         }
+    }
 
+    private void Jump()
+    {
         
-        fallingVel -= Physics.gravity * (gravityModifier * Time.fixedDeltaTime);
-        if (controller.isGrounded)
+        if(controller.isGrounded)
         {
-            groundedTimer = 0.2f;
-        }
-        if(groundedTimer > 0)
-        {
-            groundedTimer -= Time.fixedDeltaTime;
             if (Input.GetKey(KeyCode.Space))
                 fallingVel = jumpForce * Vector3.up;
             else
                 fallingVel = Vector3.zero;
         }
-
+        controller.Move(fallingVel);
+    }
+    private void Gravity()
+    {
+        fallingVel -= Physics.gravity * (gravityModifier * Time.fixedDeltaTime);
         controller.Move(fallingVel);
     }
 
