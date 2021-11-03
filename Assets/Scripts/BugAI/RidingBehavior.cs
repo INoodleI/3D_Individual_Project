@@ -9,6 +9,10 @@ public class RidingBehavior : RhinoBugBehavior
     public override Type Update()
     {
         brain.agent.SetDestination(transform.position + cam.forward*2f);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return typeof(WanderBehavior);
+        }
         return GetType();
     }
 
