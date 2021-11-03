@@ -26,9 +26,9 @@ public class RhinoBugBrain : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("Initializing Bug: "+name);
+//        Debug.Log("Initializing Bug: "+name);
         InitializeBehaviorStates();
-        Debug.Log("Bug state: " + currentState.GetType());
+//        Debug.Log("Bug state: " + currentState.GetType());
         animator.speed = animationScaleFactor;
         updateAnimSpeed = false;
     }
@@ -47,9 +47,9 @@ public class RhinoBugBrain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update: "+ currentState.GetType());
+//        Debug.Log("Update: "+ currentState.GetType());
         Type nextState = currentState?.Update();
-        Debug.Log(" - NextState = "+ nextState);
+//        Debug.Log(" - NextState = "+ nextState);
         
         if(nextState != null && nextState != currentState.GetType())
         {

@@ -17,7 +17,7 @@ public class WanderBehavior : RhinoBugBehavior
 
     public override Type Update()
     {
-        Debug.Log(" -- WanderState Update: waiting = "+waiting + ",  target = "+waitingTime + "  stop: "+brain.agent.isStopped);
+        //Debug.Log(" -- WanderState Update: waiting = "+waiting + ",  target = "+waitingTime + "  stop: "+brain.agent.isStopped);
         if (waiting)
         {
             waitingTime -= Time.deltaTime;
@@ -64,7 +64,7 @@ public class WanderBehavior : RhinoBugBehavior
                 float y = Random.Range(-1f, 1f);
                 Vector3 randomDir = new Vector3(x, 0, y).normalized;
                 newPos = brain.home.position + randomDir * Random.Range(brain.walkFromHomeRange.x, brain.walkFromHomeRange.y);
-                Debug.Log(" -- RandomDir: "+randomDir + "   newPos: "+newPos);
+                //Debug.Log(" -- RandomDir: "+randomDir + "   newPos: "+newPos);
                 maxDist++;
             } while (!NavMesh.SamplePosition(newPos, out hit, maxDist, NavMesh.AllAreas));
 

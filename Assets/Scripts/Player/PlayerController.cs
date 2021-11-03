@@ -16,9 +16,10 @@ public class PlayerController : MonoBehaviour
     private float animSpeed;
     private float animVel;
 
-
+    [SerializeField] private Ragdoll ragdoll;
+    [SerializeField] private Animator cineCam;
     [SerializeField] private GameObject animatedModel;
-    [SerializeField] private GameObject ragdoll;
+    [SerializeField] private Transform ragdollCamLookAt;
     [SerializeField] private Rigidbody hips;
     
     private enum PlayerState
@@ -38,40 +39,67 @@ public class PlayerController : MonoBehaviour
     {
         cam = Camera.main.transform;
         fallingVel = Vector3.zero;
+        ragdoll.Initialize();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        switch (state)
+        if (state == PlayerState.Walking)
         {
-            case PlayerState.Walking:
-                Movement();
-                Gravity();
-                Jump();
-                CheckForRagdoll();
-                break;
-            case PlayerState.Ragdoll:
-                break;
-            case PlayerState.Riding:
-                break;
-            default:
-                Debug.LogError("WAAAAAAAHHHHHHHHHHHHH - Player Controller State");
-                break;
+            Movement();
+            Gravity();
+            Jump();
+            CheckForRagdoll();
+        }
+        else if (state == PlayerState.Ragdoll)
+        {
+            CameraFollowRagdoll();
+            CheckForUnRagdoll();
+        }
+        else if(state == PlayerState.Riding)
+        {
+            
         }
     }
 
+    private void CameraFollowRagdoll()
+    {
+        ragdollCamLookAt.position = hips.transform.position ;
+    }
+
+
+    private void CheckForUnRagdoll()
+    {
+        if(Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
+            UnRagdoll();
+    }
+    
+    public void UnRagdoll()
+    {
+        Debug.Log("-- UnRagdolling");
+        state = PlayerState.Walking;
+        transform.position = ragdollCamLookAt.position;
+        
+        ragdoll.Disable();
+        
+        animatedModel.SetActive(true);
+        cineCam.Play("PlayerCam");
+    }
+    
     private void CheckForRagdoll()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R)|| Input.GetMouseButtonDown(0))
             Ragdoll();
     }
 
     public void Ragdoll()
     {
+        Debug.Log("Ragdolling");
         state = PlayerState.Ragdoll;
         animatedModel.SetActive(false);
-        ragdoll.SetActive(true);
+        ragdoll.Enable();
+        cineCam.Play("RagdollCam");
     }
 
     private void Movement()
