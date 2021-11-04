@@ -18,9 +18,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Ragdoll ragdoll;
     [SerializeField] private Animator cineCam;
+    [SerializeField] private CinemachineFreeLook walkingCam;
+    [SerializeField] private CinemachineFreeLook ragdollCam;
     [SerializeField] private GameObject animatedModel;
     [SerializeField] private Transform ragdollCamLookAt;
     [SerializeField] private Rigidbody hips;
+    [SerializeField] private float ragdollInfluence;
     
     private enum PlayerState
     {
@@ -63,16 +66,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EnableRiding(RhinoBugBrain brain)
+    {
+        UnRagdoll();
+        state = PlayerState.Riding;
+        anim.SetBool("Riding", true);
+        brain.SwitchState(typeof(RidingBehavior));
+    }
+    
     private void CameraFollowRagdoll()
     {
-        ragdollCamLookAt.position = hips.transform.position ;
+        walkingCam.m_XAxis.Value = ragdollCam.m_XAxis.Value;
+        walkingCam.m_YAxis.Value = ragdollCam.m_YAxis.Value;
+        
+        float horiz = Input.GetAxisRaw("Horizontal");
+        float vert = Input.GetAxisRaw("Vertical");
+        Vector3 dir = new Vector3(horiz,0,vert).normalized;
+        float targetAngle = Vector3.SignedAngle(Vector3.forward, dir, Vector3.up) + cam.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0f) * Vector3.forward;
+        hips.AddForce(moveDir * ragdollInfluence, ForceMode.Acceleration);
+        ragdollCamLookAt.position = hips.transform.position;
     }
 
 
     private void CheckForUnRagdoll()
     {
         if(Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
-            UnRagdoll();
+            if(hips.velocity.sqrMagnitude <= 0.1f)
+                UnRagdoll();
     }
     
     public void UnRagdoll()
@@ -132,15 +155,20 @@ public class PlayerController : MonoBehaviour
         {
             BlendAnimSpeed(0);
         }
+        ragdollCam.m_XAxis.Value = walkingCam.m_XAxis.Value;
+        ragdollCam.m_YAxis.Value = walkingCam.m_YAxis.Value;
     }
 
     private void Jump()
     {
-        
         if(controller.isGrounded)
         {
             if (Input.GetKey(KeyCode.Space))
-                fallingVel = jumpForce * Vector3.up;
+            {
+                //fallingVel = jumpForce * Vector3.up;
+                Ragdoll();
+                hips.velocity = (transform.forward + Vector3.up+ Vector3.up) * 70f;
+            }
             else
                 fallingVel = Vector3.zero;
         }

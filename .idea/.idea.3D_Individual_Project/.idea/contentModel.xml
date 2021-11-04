@@ -45,6 +45,7 @@
             <e p="WanderBehavior.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
+            <e p="BugRidingTrigger.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="Ragdoll.cs" t="Include" />
           </e>

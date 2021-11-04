@@ -63,11 +63,12 @@
      <Compile Include="Assets\Scripts\BugAI\RhinoBugBrain.cs" />
      <Compile Include="Assets\Assets\Meadow\Lowpoly Medieval Demos\Environment_Free\PlayerMovement.cs" />
      <Compile Include="Assets\Ultimate 10 Plus Shaders\Scripts\U10PS_SnowOverTime.cs" />
+     <Compile Include="Assets\Scripts\Player\Ragdoll.cs" />
      <Compile Include="Assets\Ultimate 10 Plus Shaders\Scripts\U10PS_DissolveOverTime.cs" />
      <Compile Include="Assets\Ultimate 10 Plus Shaders\Scripts\U10PS_ExampleReview.cs" />
      <Compile Include="Assets\Scripts\BugAI\WanderBehavior.cs" />
      <Compile Include="Assets\Scripts\BugAI\RhinoBugBehavior.cs" />
-     <Compile Include="Assets\Scripts\Player\Ragdoll.cs" />
+     <Compile Include="Assets\Scripts\Player\BugRidingTrigger.cs" />
      <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Edge Detection.shader" />
      <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Grass Sway.shader" />
      <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Blur.shader" />

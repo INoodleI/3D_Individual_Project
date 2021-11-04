@@ -6,13 +6,24 @@ using UnityEngine;
 public class RidingBehavior : RhinoBugBehavior
 {
     private Transform cam;
+    [SerializeField] private Transform playerSit;
     public override Type Update()
     {
-        brain.agent.SetDestination(transform.position + cam.forward*2f);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            return typeof(WanderBehavior);
+            Debug.Log("Fast: "+brain.runSpeed);
+            brain.agent.velocity = brain.agent.velocity.normalized * brain.runSpeed;
+            brain.agent.angularSpeed = 180;
+            brain.PlayAnim("Walk");
         }
+        else
+        {
+            brain.agent.angularSpeed = 720;
+            brain.PlayAnim("Walk");
+        }
+        brain.agent.SetDestination(transform.position + cam.forward*4f);
+        if (Input.GetKeyDown(KeyCode.Space))
+            return (typeof(WanderBehavior));
         return GetType();
     }
 

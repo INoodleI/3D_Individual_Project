@@ -53,7 +53,7 @@ public class RhinoBugBrain : MonoBehaviour
         
         if(nextState != null && nextState != currentState.GetType())
         {
-            SwitchState(GetType());
+            SwitchState(nextState);
         }
 
         if (updateAnimSpeed)
@@ -65,6 +65,12 @@ public class RhinoBugBrain : MonoBehaviour
 
     public void SwitchState(Type nextState)
     {
+        Debug.Log("Switching State: " + nextState);
+        foreach (var VARIABLE in behaviors.Keys)
+        {
+            Debug.Log(VARIABLE);
+        }
+        Debug.Log(behaviors.ContainsKey(nextState));
         currentState = behaviors[nextState];
         currentState.OnTrigger();
     }

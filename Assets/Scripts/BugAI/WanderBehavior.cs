@@ -39,6 +39,7 @@ public class WanderBehavior : RhinoBugBehavior
     public override void OnTrigger()
     {
         brain.agent.speed = brain.walkSpeed;
+        brain.PlayAnim("Walk");
         CalculateNewTarget();
     }
 
