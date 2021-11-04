@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     [SerializeField] private CharacterController controller;
     [SerializeField] private Animator anim;
     [SerializeField] private float walkSpeed;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Transform cam;
     private float animSpeed;
     private float animVel;
+    private RhinoBugBrain bugBrain;
 
     [SerializeField] private Ragdoll ragdoll;
     [SerializeField] private Animator cineCam;
@@ -36,6 +38,11 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 fallingVel;
     private float turnSmoothVelocity;
+
+    public void Awake()
+    {
+        instance = this;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -43,6 +50,8 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main.transform;
         fallingVel = Vector3.zero;
         ragdoll.Initialize();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -62,16 +71,35 @@ public class PlayerController : MonoBehaviour
         }
         else if(state == PlayerState.Riding)
         {
-            
+            Riding();
         }
+    }
+
+    private void Riding()
+    {
+        
+    }
+
+    public void Dismount()
+    {
+        transform.SetParent(null);
+        anim.SetBool("Riding", false);
+        state = PlayerState.Walking;
     }
 
     public void EnableRiding(RhinoBugBrain brain)
     {
+        
+        Debug.Log("Initiate Ride: ");
         UnRagdoll();
         state = PlayerState.Riding;
         anim.SetBool("Riding", true);
+        cineCam.Play("PlayerCam");
         brain.SwitchState(typeof(RidingBehavior));
+        bugBrain = brain;
+        transform.SetParent(brain.playerSit);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
     
     private void CameraFollowRagdoll()
@@ -93,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForUnRagdoll()
     {
-        if(Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
+        //if(Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
             if(hips.velocity.sqrMagnitude <= 0.1f)
                 UnRagdoll();
     }
@@ -118,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     public void Ragdoll()
     {
-        Debug.Log("Ragdolling");
+        //Debug.Log("Ragdolling");
         state = PlayerState.Ragdoll;
         animatedModel.SetActive(false);
         ragdoll.Enable();

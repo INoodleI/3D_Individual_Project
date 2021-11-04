@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5815358728889425950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.768, z: 0.302}
+  m_LocalPosition: {x: 0, y: 1.617, z: 0.296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6724817130058429619}
@@ -129,6 +129,10 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 8443649998274309952}
+    - target: {fileID: 2913966808067488930, guid: 917f6251706e29840a60831cff210d29, type: 3}
+      propertyPath: playerSit
+      value: 
+      objectReference: {fileID: 1585305078351580018}
     - target: {fileID: 2913966808067488930, guid: 917f6251706e29840a60831cff210d29, type: 3}
       propertyPath: walkFromHomeRange.x
       value: 2

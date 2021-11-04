@@ -8,7 +8,7 @@ public class BugRidingTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+//        Debug.Log(other.name);
         if (other.tag == "Bug")
         {
             pc.EnableRiding(other.GetComponent<RhinoBugBrain>());

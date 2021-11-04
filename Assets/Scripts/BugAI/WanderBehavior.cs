@@ -38,13 +38,17 @@ public class WanderBehavior : RhinoBugBehavior
 
     public override void OnTrigger()
     {
+        //Debug.Log("OnTrigger: ");
         brain.agent.speed = brain.walkSpeed;
         brain.PlayAnim("Walk");
-        CalculateNewTarget();
+        brain.agent.angularSpeed = 720;
+        brain.agent.speed = brain.walkSpeed;
+        //CalculateNewTarget();
     }
 
     private void CalculateNewTarget()
     {
+        //Debug.Log("Calculating New Target: ");
         if (!waiting && Random.Range(0f, 1f) <= 0.4f)
         {
             waiting = true;

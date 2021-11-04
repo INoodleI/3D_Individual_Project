@@ -7,29 +7,43 @@ public class RidingBehavior : RhinoBugBehavior
 {
     private Transform cam;
     [SerializeField] private Transform playerSit;
+    private bool run;
     public override Type Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        Debug.Log("Riding Update: ");
+        Movement();
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Fast: "+brain.runSpeed);
-            brain.agent.velocity = brain.agent.velocity.normalized * brain.runSpeed;
-            brain.agent.angularSpeed = 180;
-            brain.PlayAnim("Walk");
+            PlayerController.instance.Dismount();
+            return (typeof(WanderBehavior));
+        }
+        return GetType();
+    }
+
+    private void Movement()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            //Debug.Log("Fast: "+brain.runSpeed);
+            brain.agent.velocity = transform.forward * brain.runSpeed;
+            brain.agent.angularSpeed = 30;
+            if (run == false)
+                brain.PlayAnim("Run");
+            run = true;
         }
         else
         {
             brain.agent.angularSpeed = 720;
-            brain.PlayAnim("Walk");
+            if (run)
+                brain.PlayAnim("Walk");
+            run = false;
         }
-        brain.agent.SetDestination(transform.position + cam.forward*4f);
-        if (Input.GetKeyDown(KeyCode.Space))
-            return (typeof(WanderBehavior));
-        return GetType();
+        brain.agent.SetDestination(transform.position + cam.forward*2f * transform.parent.localScale.x);
     }
 
     public override void OnTrigger()
     {
-        base.OnTrigger();
+        run = false;
     }
 
     public RidingBehavior(RhinoBugBrain b, Transform camera) : base(b)

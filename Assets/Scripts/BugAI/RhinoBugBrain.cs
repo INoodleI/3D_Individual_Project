@@ -18,6 +18,7 @@ public class RhinoBugBrain : MonoBehaviour
     [SerializeField] public float walkSpeed;
     [SerializeField] public float runSpeed;
     [SerializeField] public Vector2 walkFromHomeRange;
+    [SerializeField] public Transform playerSit;
     private Dictionary<Type, RhinoBugBehavior> behaviors;
     private RhinoBugBehavior currentState;
 
@@ -65,18 +66,13 @@ public class RhinoBugBrain : MonoBehaviour
 
     public void SwitchState(Type nextState)
     {
-        Debug.Log("Switching State: " + nextState);
-        foreach (var VARIABLE in behaviors.Keys)
-        {
-            Debug.Log(VARIABLE);
-        }
-        Debug.Log(behaviors.ContainsKey(nextState));
         currentState = behaviors[nextState];
         currentState.OnTrigger();
     }
 
     public void PlayAnim(string anim)
     {
+        Debug.Log("Playing Anim: "+anim);
         switch (anim)
         {
             case "Idle":
