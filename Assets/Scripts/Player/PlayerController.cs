@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
     
     public void UnRagdoll()
     {
-        Debug.Log("-- UnRagdolling");
+//        Debug.Log("-- UnRagdolling");
         state = PlayerState.Walking;
         transform.position = ragdollCamLookAt.position;
         
@@ -211,6 +211,8 @@ public class PlayerController : MonoBehaviour
     private void BlendAnimSpeed(float target)
     {
         animSpeed = Mathf.SmoothDamp(animSpeed, target, ref animVel, turnSmoothTime);
+        if (animSpeed > 0.99f)
+            animSpeed = 1;
         anim.SetFloat("Speed", animSpeed);
     }
 }

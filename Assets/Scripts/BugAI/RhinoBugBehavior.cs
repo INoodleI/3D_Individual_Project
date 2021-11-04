@@ -18,6 +18,11 @@ public abstract class RhinoBugBehavior
 
     public abstract Type Update();
 
+    public virtual void SpecialEvent(int eventNum)
+    {
+        return;
+    }
+
     public virtual void OnTrigger()
     {
         return;

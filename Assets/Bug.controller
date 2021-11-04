@@ -40,7 +40,7 @@ AnimatorStateMachine:
     m_Position: {x: 502.7779, y: 12.283936, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2295435405138081506}
-    m_Position: {x: 573.76544, y: 251.48148, z: 0}
+    m_Position: {x: 600, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4878563117624522479}
     m_Position: {x: 601.5433, y: 186.66666, z: 0}
@@ -171,7 +171,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Run Forward In Place
-  m_Speed: 1
+  m_Speed: 1.1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

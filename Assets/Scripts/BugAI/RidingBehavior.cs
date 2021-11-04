@@ -8,16 +8,57 @@ public class RidingBehavior : RhinoBugBehavior
     private Transform cam;
     [SerializeField] private Transform playerSit;
     private bool run;
+    private float attackingCooldown;
     public override Type Update()
     {
         Debug.Log("Riding Update: ");
-        Movement();
+        if (attackingCooldown > 0)
+        {
+            NoMove();
+            attackingCooldown -= Time.deltaTime;
+            if (attackingCooldown <= 0)
+            {
+                if(run)
+                    brain.PlayAnim("Run");
+                else
+                    brain.PlayAnim("Walk");
+                Movement();
+            }
+        }
+        else
+        {
+            Movement();
+            CheckForAttack();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayerController.instance.Dismount();
             return (typeof(WanderBehavior));
         }
         return GetType();
+    }
+
+    private void NoMove()
+    {
+        brain.agent.velocity = Vector3.zero;
+    }
+
+    private void Attack()
+    {
+        attackingCooldown = 0.5f;
+        brain.PlayAnim("Stab");
+    }
+
+    private void CheckForAttack()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+            Attack();
+    }
+
+    public override void SpecialEvent(int eventNum)
+    {
+        Debug.Log("Poke");
     }
 
     private void Movement()
@@ -38,7 +79,7 @@ public class RidingBehavior : RhinoBugBehavior
                 brain.PlayAnim("Walk");
             run = false;
         }
-        brain.agent.SetDestination(transform.position + cam.forward*2f * transform.parent.localScale.x);
+        brain.agent.SetDestination(transform.position + cam.forward*4f);
     }
 
     public override void OnTrigger()

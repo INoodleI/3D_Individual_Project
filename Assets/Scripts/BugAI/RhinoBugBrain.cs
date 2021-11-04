@@ -64,6 +64,11 @@ public class RhinoBugBrain : MonoBehaviour
         }
     }
 
+    public void AttackFrame()
+    {
+        currentState.SpecialEvent(0);
+    }
+
     public void SwitchState(Type nextState)
     {
         currentState = behaviors[nextState];
@@ -72,7 +77,7 @@ public class RhinoBugBrain : MonoBehaviour
 
     public void PlayAnim(string anim)
     {
-        Debug.Log("Playing Anim: "+anim);
+//        Debug.Log("Playing Anim: "+anim);
         switch (anim)
         {
             case "Idle":
