@@ -46,8 +46,10 @@
           </e>
           <e p="Player" t="Include">
             <e p="BugRidingTrigger.cs" t="Include" />
+            <e p="FootstepScript.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="Ragdoll.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
           </e>
           <e p="Tilt.cs" t="Include" />
         </e>

@@ -79,7 +79,7 @@ public class RidingBehavior : RhinoBugBehavior
                 brain.PlayAnim("Walk");
             run = false;
         }
-        brain.agent.SetDestination(transform.position + cam.forward*4f);
+        brain.agent.SetDestination(transform.position + cam.forward*3f);
     }
 
     public override void OnTrigger()
